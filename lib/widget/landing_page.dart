@@ -12,9 +12,11 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(DefaultTextStyle.of(context).style.fontFamily);
     return Container(
       decoration: AppDecoration.bg,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Image(
@@ -26,14 +28,14 @@ class LandingPage extends StatelessWidget {
                   borderRadius: 20,
                   innerColor: AppColor.orange,
                   outerColor: AppColor.secondary,
-                  onSubmit: () async{
+                  onSubmit: () async {
                     RouteNavigator.push(context, const Blog());
                   },
                   text: 'Slide to Continue',
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 67, 144, 125)))
+                      color: AppColor.orange))
               .p20(),
         ],
       ),
