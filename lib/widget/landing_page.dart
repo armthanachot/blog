@@ -12,7 +12,6 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(DefaultTextStyle.of(context).style.fontFamily);
     return Container(
       decoration: AppDecoration.bg,
       child: Column(

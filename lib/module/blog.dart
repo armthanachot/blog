@@ -16,85 +16,85 @@ class _BlogState extends State<Blog> {
   TextEditingController _postController = TextEditingController();
   bool _showPostBox = false;
   ScrollController _scrollController = ScrollController();
-  List<String> _posts = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z"
+  final List<Map<String, String>> _posts = [
+    {
+      "content": "A",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_A_red-512.png"
+    },
+    {
+      "content": "B",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_B_red-512.png"
+    },
+    {
+      "content": "C",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_C_red-512.png"
+    },
+    {
+      "content": "D",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_D_red-512.png"
+    },
+    {
+      "content": "E",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_E_red-512.png"
+    },
+    {
+      "content": "F",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_F_red-512.png"
+    },
+    {
+      "content": "G",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_G_red-512.png"
+    },
+    {
+      "content": "H",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_H_red-512.png"
+    },
+    {
+      "content": "I",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_I_red-512.png"
+    },
+    {
+      "content": "J",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_J_red-512.png"
+    },
+    {
+      "content": "K",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_K_red-512.png"
+    },
+    {
+      "content": "L",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_L_red-512.png"
+    },
+    {"content": "M", "image": ""},
+    {"content": "N", "image": ""},
+    {"content": "O", "image": ""},
+    {"content": "P", "image": ""},
+    {"content": "Q", "image": ""},
+    {"content": "R", "image": ""},
+    {"content": "S", "image": ""},
+    {"content": "T", "image": ""},
+    {"content": "U", "image": ""},
+    {"content": "V", "image": ""},
+    {"content": "W", "image": ""},
+    {"content": "X", "image": ""},
+    {"content": "Y", "image": ""},
+    {
+      "content": "Z",
+      "image":
+          "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_Z_red-512.png"
+    },
   ];
   Widget buildPostBox() {
     return SizedBox(
@@ -118,7 +118,8 @@ class _BlogState extends State<Blog> {
                 onPressed: () {
                   if (_postController.text.isNotEmpty) {
                     setState(() {
-                      _posts.insert(0, _postController.text);
+                      _posts.insert(
+                          0, {"content": _postController.text, "image": ""});
                       _postController.clear();
                       FocusScope.of(context).unfocus(); // Close the keyboard
                     });
@@ -151,7 +152,7 @@ class _BlogState extends State<Blog> {
     );
   }
 
-  Widget buildBox(String text) {
+  Widget buildBlog(Map<String, String> post) {
     return Container(
       width: ScreenSize.fullW(context),
       padding: const EdgeInsets.all(20),
@@ -160,9 +161,22 @@ class _BlogState extends State<Blog> {
         color: AppColor.secondary,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: text.textWithStyle(const TextStyle(
-        fontSize: 16,
-      )),
+      child: Column(
+        children: [
+                  post["image"]!.isNotEmpty &&
+                  post["image"] != ""
+              ? Image.network(post["image"] ?? "",
+                  width: 100, height: 100, fit: BoxFit.cover)
+              : Container(),
+          Text(
+            post["content"] ?? "",
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -207,7 +221,7 @@ class _BlogState extends State<Blog> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (_showPostBox) buildPostBox(),
-                ..._posts.map((e) => buildBox(e)).toList(),
+                ..._posts.map((e) => buildBlog(e)).toList(),
               ],
             ),
           ),
